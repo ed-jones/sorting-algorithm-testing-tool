@@ -1,14 +1,16 @@
 package testingtool;
 
-import java.util.function.Function;
+import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
 public class TestingTool<T> {
-    Function<Int[], Function<Int, Int, Boolean>, Int[]> sortingAlgorithm;
-    Function<T, T, Boolean> compare;
-    Function<T> random;
+    BiFunction<T[], BiFunction<T, T, Boolean>, T[]> sortingAlgorithm;
+    BiFunction<T, T, Boolean> compare;
+    Supplier<T> random;
     Efficiency efficiency;
 
-    public TestingTool(Function<T[], T[]> sortingAlgorithm, Function<T, T, Boolean> compare, Function<T> random) {
+    public TestingTool(BiFunction<T[], BiFunction<T, T, Boolean>, T[]> sortingAlgorithm,
+            BiFunction<T, T, Boolean> compare, Supplier<T> random) {
         this.sortingAlgorithm = sortingAlgorithm;
         this.compare = compare;
         this.random = random;
@@ -26,7 +28,7 @@ public class TestingTool<T> {
         this.efficiency = efficiency;
     }
 
-    public void addTest(Tests test, Int length) {
+    public void addTest(Tests test, Integer length) {
         // Code to handle adding tests
     }
 

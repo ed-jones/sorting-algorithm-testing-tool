@@ -1,3 +1,5 @@
+import java.util.function.Function;
+
 public class InsertionSort<T> {
     public Function<T[], Function<T, T, Boolean>, T[]> insertionSort = (input, compare) -> {
         for (int i = 1; i < input.length; i++) {
