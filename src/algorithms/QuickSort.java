@@ -3,32 +3,27 @@ package algorithms;
 import helpers.FuncInterface;
 
 
-public class QuickSort<T extends Comparable<? super T>> {
-
-    private FuncInterface<T> ICompare;
-
+public class QuickSort<T> {
     public T[] quickSort(T[] input, FuncInterface<T> ICompare) {
-
-        this.ICompare = ICompare;
-        sort(input, 0, input.length - 1);
+        sort(input, 0, input.length - 1, ICompare);
         return input;
     };
 
-    private void sort(T[] array, int startIndex, int endIndex)
+    private void sort(T[] array, int startIndex, int endIndex, FuncInterface<T> ICompare)
     {
         // verify that the start and end index have not overlapped
         if (startIndex < endIndex)
         {
             // calculate the pivotIndex
-            int pivotIndex = partition(array, startIndex, endIndex);
+            int pivotIndex = partition(array, startIndex, endIndex, ICompare);
             // sort the left sub-array
-            sort(array, startIndex, pivotIndex);
+            sort(array, startIndex, pivotIndex, ICompare);
             // sort the right sub-array
-            sort(array, pivotIndex + 1, endIndex);  
+            sort(array, pivotIndex + 1, endIndex, ICompare);  
         }
     }
 
-    private int partition(T[] array, int startIndex, int endIndex)
+    private int partition(T[] array, int startIndex, int endIndex, FuncInterface<T> ICompare)
     {
         int pivotIndex = (startIndex + endIndex) / 2;
         T pivotValue = array[pivotIndex];
