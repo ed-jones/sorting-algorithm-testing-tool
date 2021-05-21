@@ -1,10 +1,16 @@
 package algorithms;
 
+import helpers.FuncInterface;
+
+
 public class QuickSort<T extends Comparable<? super T>> {
 
-    public T[] quickSort(T[] input) {
+    private FuncInterface<T> ICompare;
+
+    public T[] quickSort(T[] input, FuncInterface<T> ICompare) {
+
+        this.ICompare = ICompare;
         sort(input, 0, input.length - 1);
-        
         return input;
     };
 
@@ -33,11 +39,11 @@ public class QuickSort<T extends Comparable<? super T>> {
         {
             // start at the FIRST index of the sub-array and increment
             // FORWARD until we find a value that is > pivotValue
-            do startIndex++; while (array[startIndex].compareTo(pivotValue) < 0) ;
+            do startIndex++; while (ICompare.compare(array[startIndex], pivotValue)) ;
 
             // start at the LAST index of the sub-array and increment
             // BACKWARD until we find a value that is < pivotValue
-            do endIndex--; while (array[endIndex].compareTo(pivotValue) > 0) ;
+            do endIndex--; while (ICompare.compare(pivotValue, array[endIndex])) ;
 
             if (startIndex >= endIndex) return endIndex;
 

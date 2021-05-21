@@ -1,18 +1,19 @@
 package testingtool;
 
+import helpers.FuncInterface;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 public class TestingTool<T> {
     BiFunction<T[], BiFunction<T, T, Boolean>, T[]> sortingAlgorithm;
-    BiFunction<T, T, Boolean> compare;
+    FuncInterface<T> ICompare;
     Supplier<T> random;
     Efficiency efficiency;
 
     public TestingTool(BiFunction<T[], BiFunction<T, T, Boolean>, T[]> sortingAlgorithm,
-            BiFunction<T, T, Boolean> compare, Supplier<T> random) {
+            FuncInterface<T> ICompare, Supplier<T> random) {
         this.sortingAlgorithm = sortingAlgorithm;
-        this.compare = compare;
+        this.ICompare = ICompare;
         this.random = random;
     }
 
