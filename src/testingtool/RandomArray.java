@@ -24,8 +24,6 @@ public class RandomArray
 {
     //Creating the test array which will be passed back up for testing
     List<Object> testArray;
-    List<Double> testArray_double;
-    List<String> testArray_string;
     
     
     //Default constructor    
