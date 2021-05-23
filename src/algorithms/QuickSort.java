@@ -1,15 +1,15 @@
 package algorithms;
 
 import helpers.FuncInterface;
-
+import java.util.List;
 
 public class QuickSort<T> {
-    public T[] quickSort(T[] input, FuncInterface<T> ICompare) {
-        sort(input, 0, input.length - 1, ICompare);
+    public List<T> quickSort(List<T> input, FuncInterface<T> ICompare) {
+        sort(input, 0, input.size() - 1, ICompare);
         return input;
     };
 
-    private void sort(T[] array, int startIndex, int endIndex, FuncInterface<T> ICompare)
+    private void sort(List<T> array, int startIndex, int endIndex, FuncInterface<T> ICompare)
     {
         // verify that the start and end index have not overlapped
         if (startIndex < endIndex)
@@ -23,10 +23,10 @@ public class QuickSort<T> {
         }
     }
 
-    private int partition(T[] array, int startIndex, int endIndex, FuncInterface<T> ICompare)
+    private int partition(List<T> array, int startIndex, int endIndex, FuncInterface<T> ICompare)
     {
         int pivotIndex = (startIndex + endIndex) / 2;
-        T pivotValue = array[pivotIndex];
+        T pivotValue = array.get(pivotIndex);
         startIndex--;
         endIndex++;
 
@@ -34,18 +34,18 @@ public class QuickSort<T> {
         {
             // start at the FIRST index of the sub-array and increment
             // FORWARD until we find a value that is > pivotValue
-            do startIndex++; while (ICompare.compare(array[startIndex], pivotValue)) ;
+            do startIndex++; while (ICompare.compare(array.get(startIndex), pivotValue)) ;
 
             // start at the LAST index of the sub-array and increment
             // BACKWARD until we find a value that is < pivotValue
-            do endIndex--; while (ICompare.compare(pivotValue, array[endIndex])) ;
+            do endIndex--; while (ICompare.compare(pivotValue, array.get(endIndex))) ;
 
             if (startIndex >= endIndex) return endIndex;
 
             // swap values at the startIndex and endIndex
-            T temp = array[startIndex];
-            array[startIndex] = array[endIndex];
-            array[endIndex] = temp;
+            T temp = array.get(startIndex);
+            array.set(startIndex, array.get(endIndex));
+            array.set(endIndex, temp);
         }
     }
 }

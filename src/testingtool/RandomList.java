@@ -24,7 +24,6 @@ public class RandomList<T>
         list = new ArrayList<T>();
 
         Random rand = new Random();
-        rand.setSeed(System.currentTimeMillis());
 
         for (int i = 0; i < size; i++) {
             list.add(creator.apply(rand));

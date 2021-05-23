@@ -1,22 +1,24 @@
 package algorithms;
 
 import helpers.FuncInterface;
+import java.util.List;
+
 
 public class BubbleSort<T> {
-    public T[] bubbleSort(T[] input, FuncInterface<T> ICompare){
-        int n = input.length;
+    public List<T> bubbleSort(List<T> input, FuncInterface<T> ICompare){
+        int n = input.size();
         while (n > 0)
         {
             int lastModifiedIndex = 0;
             for (int currentIndex = 1; currentIndex < n; currentIndex++)
             {
                 // if the item at the previous index is greater than the item at the `currentIndex`, swap them
-                if (ICompare.compare(input[currentIndex - 1], input[currentIndex]))
+                if (ICompare.compare(input.get(currentIndex - 1), input.get(currentIndex)))
                 {
                     // swap
-                    T temp = input[currentIndex - 1];
-                    input[currentIndex - 1] = input[currentIndex];
-                    input[currentIndex] = temp;
+                    T temp = input.get(currentIndex - 1);
+                    input.set(currentIndex - 1, input.get(currentIndex));
+                    input.set(currentIndex, temp);
                     // save the index that was modified
                     lastModifiedIndex = currentIndex;
                 }
