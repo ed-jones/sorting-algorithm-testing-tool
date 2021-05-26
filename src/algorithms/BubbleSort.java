@@ -3,9 +3,11 @@ package algorithms;
 import helpers.FuncInterface;
 import java.util.List;
 
+import algorithms.interfaces.ISort;
 
-public class BubbleSort<T> {
-    public List<T> bubbleSort(List<T> input, FuncInterface<T> ICompare){
+
+public class BubbleSort<T> implements ISort<T> {
+    public List<T> sort(List<T> input, FuncInterface<T> ICompare){
         int n = input.size();
         while (n > 0)
         {

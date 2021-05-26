@@ -3,23 +3,25 @@ package algorithms;
 import helpers.FuncInterface;
 import java.util.List;
 
-public class QuickSort<T> {
-    public List<T> quickSort(List<T> input, FuncInterface<T> ICompare) {
-        sort(input, 0, input.size() - 1, ICompare);
+import algorithms.interfaces.ISort;
+
+public class QuickSort<T> implements ISort<T> {
+    public List<T> sort(List<T> input, FuncInterface<T> ICompare) {
+        quickSort(input, 0, input.size() - 1, ICompare);
         return input;
     };
 
-    private void sort(List<T> array, int startIndex, int endIndex, FuncInterface<T> ICompare)
+    private void quickSort(List<T> array, int startIndex, int endIndex, FuncInterface<T> ICompare)
     {
         // verify that the start and end index have not overlapped
         if (startIndex < endIndex)
         {
             // calculate the pivotIndex
             int pivotIndex = partition(array, startIndex, endIndex, ICompare);
-            // sort the left sub-array
-            sort(array, startIndex, pivotIndex, ICompare);
-            // sort the right sub-array
-            sort(array, pivotIndex + 1, endIndex, ICompare);  
+            // quickSort the left sub-array
+            quickSort(array, startIndex, pivotIndex, ICompare);
+            // quickSort the right sub-array
+            quickSort(array, pivotIndex + 1, endIndex, ICompare);  
         }
     }
 

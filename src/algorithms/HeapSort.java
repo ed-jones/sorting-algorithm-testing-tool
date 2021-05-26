@@ -3,9 +3,11 @@ package algorithms;
 import helpers.FuncInterface;
 import java.util.List;
 
-public class HeapSort<T> {
+import algorithms.interfaces.ISort;
+
+public class HeapSort<T> implements ISort<T> {
     
-    public List<T> heapSort(List<T> input, FuncInterface<T> ICompare)
+    public List<T> sort(List<T> input, FuncInterface<T> ICompare)
     {
         int size = input.size();
 

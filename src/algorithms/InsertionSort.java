@@ -1,11 +1,12 @@
 package algorithms;
 
 import helpers.FuncInterface;
-import java.util.function.BiFunction;
 import java.util.List;
 
-public class InsertionSort<T> {
-    public BiFunction<List<T>, FuncInterface<T>, List<T>> insertionSort = (input, ICompare) -> {
+import algorithms.interfaces.ISort;
+
+public class InsertionSort<T> implements ISort<T> {
+    public List<T> sort(List<T> input, FuncInterface<T> ICompare) {
         for (int i = 1; i < input.size(); i++) {
             T value = input.get(i);
             int j = i - 1;

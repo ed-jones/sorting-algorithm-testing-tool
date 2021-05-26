@@ -3,8 +3,10 @@ package algorithms;
 import helpers.FuncInterface;
 import java.util.List;
 
-public class ShellSort<T> {
-    public List<T> shellSort(List<T> input, FuncInterface<T> ICompare)
+import algorithms.interfaces.ISort;
+
+public class ShellSort<T> implements ISort<T> {
+    public List<T> sort(List<T> input, FuncInterface<T> ICompare)
     {
         /*
          * for-loop setup:

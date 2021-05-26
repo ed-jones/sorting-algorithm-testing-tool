@@ -3,8 +3,10 @@ package algorithms;
 import helpers.FuncInterface;
 import java.util.List;
 
-public class SelectionSort<T> {
-    public List<T> selectionSort(List<T> input, FuncInterface<T> ICompare) {
+import algorithms.interfaces.ISort;
+
+public class SelectionSort<T> implements ISort<T> {
+    public List<T> sort(List<T> input, FuncInterface<T> ICompare) {
         // step 1: loop from the beginning of the array to the second to last item
         for (int currentIndex = 0; currentIndex < input.size() - 1; currentIndex++)
         {
