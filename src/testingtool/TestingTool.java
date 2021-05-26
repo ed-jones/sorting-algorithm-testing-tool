@@ -1,27 +1,31 @@
 package testingtool;
 
 import helpers.FuncInterface;
-import java.util.function.BiFunction;
-import java.util.function.Supplier;
+
+import java.util.ArrayList;
+import java.util.List;
+import algorithms.interfaces.ISort;
 
 public class TestingTool<T> {
-    BiFunction<T[], BiFunction<T, T, Boolean>, T[]> sortingAlgorithm;
+    ISort<T> sortingAlgorithm;
     FuncInterface<T> ICompare;
-    Supplier<T> random;
+    List<T> randomList;
     Efficiency efficiency;
-
-    public TestingTool(BiFunction<T[], BiFunction<T, T, Boolean>, T[]> sortingAlgorithm,
-            FuncInterface<T> ICompare, Supplier<T> random) {
+    List<Test> tests;
+    
+    public TestingTool(ISort<T> sortingAlgorithm,
+            FuncInterface<T> ICompare, List<T> randomList) {
         this.sortingAlgorithm = sortingAlgorithm;
         this.ICompare = ICompare;
-        this.random = random;
+        this.randomList = randomList;
+        tests = new ArrayList<Test>();
     }
 
     public enum Efficiency {
         N_LOG_SQUARED_N, N_SQUARED, N_LOG_N, LOG_N, N
     }
 
-    public enum Tests {
+    public enum TestType {
         PRESORTED, RANDOM, REVERSE_SORTED, NULL,
     }
 
@@ -29,12 +33,16 @@ public class TestingTool<T> {
         this.efficiency = efficiency;
     }
 
-    public void addTest(Tests test, Integer length) {
+    public void addTest(TestType typeOfTest) {
         // Code to handle adding tests
+        tests.add(new Test<T>(ICompare, sortingAlgorithm, typeOfTest, randomList));
     }
 
     public void runTests() {
         // Code to handle running tests
+        for(Test<T> t : tests) {
+            t.run();
+        }
     }
 
 }
