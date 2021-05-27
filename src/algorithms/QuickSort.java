@@ -36,11 +36,11 @@ public class QuickSort<T> implements ISort<T> {
         {
             // start at the FIRST index of the sub-array and increment
             // FORWARD until we find a value that is > pivotValue
-            do startIndex++; while (ICompare.compare(array.get(startIndex), pivotValue)) ;
+            do startIndex++; while (ICompare.compare(pivotValue, array.get(startIndex))) ;
 
             // start at the LAST index of the sub-array and increment
             // BACKWARD until we find a value that is < pivotValue
-            do endIndex--; while (ICompare.compare(pivotValue, array.get(endIndex))) ;
+            do endIndex--; while (ICompare.compare(array.get(endIndex), pivotValue)) ;
 
             if (startIndex >= endIndex) return endIndex;
 
