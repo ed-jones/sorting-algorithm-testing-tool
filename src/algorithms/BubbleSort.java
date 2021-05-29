@@ -1,6 +1,8 @@
 package algorithms;
 
 import helpers.FuncInterface;
+
+import java.net.CacheRequest;
 import java.util.List;
 
 import algorithms.interfaces.ISort;
@@ -23,6 +25,8 @@ public class BubbleSort<T> implements ISort<T> {
                     input.set(currentIndex, temp);
                     // save the index that was modified
                     lastModifiedIndex = currentIndex;
+
+                    NUM_CALLED++;
                 }
             }
             // save the last modified index so we know not to iterate past it since all proceeding values are sorted
@@ -30,4 +34,14 @@ public class BubbleSort<T> implements ISort<T> {
         }
         return input;
     };
+
+    private int NUM_CALLED = 0;
+
+    public int getCalled() {
+        return NUM_CALLED;
+    }
+
+    public void resetCalled() {
+        NUM_CALLED = 0;
+    }
 }

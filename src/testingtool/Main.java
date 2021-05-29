@@ -9,6 +9,7 @@ import java.util.Random;
 import algorithms.BubbleSort;
 import algorithms.InsertionSort;
 import algorithms.QuickSort;
+import algorithms.ShellSort;
 import algorithms.interfaces.ISort;
 
 class Main {
@@ -20,7 +21,7 @@ class Main {
 
         // Generate List
         RandomList<Integer> randomList = new RandomList<>();
-        List<Integer> list = randomList.generateList(rand -> rand.nextInt(100), 1000);
+        List<Integer> list = randomList.generateList(rand -> rand.nextInt(100), 100);
 
         TestingTool<Integer> testingTool = new TestingTool<Integer>(sortingAlgorithm, compare, list);
         testingTool.setEfficiency(TestingTool.Efficiency.N);

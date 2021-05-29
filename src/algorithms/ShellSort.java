@@ -8,11 +8,6 @@ import algorithms.interfaces.ISort;
 public class ShellSort<T> implements ISort<T> {
     public List<T> sort(List<T> input, FuncInterface<T> ICompare)
     {
-        /*
-         * for-loop setup:
-         *      1. set the gapSize to the length of the input / 2
-         *      2. run the loop as long as gapSize > 0
-         */
         for (int gapSize = input.size() / 2; gapSize > 0; gapSize /= 2)
         {
             for (int currentIndex = gapSize; currentIndex < input.size(); currentIndex++)
@@ -25,11 +20,23 @@ public class ShellSort<T> implements ISort<T> {
                 {
                     input.set(currentIndexCopy, input.get(currentIndexCopy - gapSize));
                     currentIndexCopy -= gapSize;
+
+                    NUM_CALLED++;
                 }
                 input.set(currentIndexCopy, item);
             }
         }
 
         return input;
+    }
+
+    private int NUM_CALLED = 0;
+
+    public int getCalled() {
+        return NUM_CALLED;
+    }
+
+    public void resetCalled() {
+        NUM_CALLED = 0;
     }
 }

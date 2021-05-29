@@ -48,7 +48,19 @@ public class QuickSort<T> implements ISort<T> {
             T temp = array.get(startIndex);
             array.set(startIndex, array.get(endIndex));
             array.set(endIndex, temp);
+
+            NUM_CALLED += 2;
         }
+    }
+
+    private int NUM_CALLED = 0;
+
+    public int getCalled() {
+        return NUM_CALLED;
+    }
+
+    public void resetCalled() {
+        NUM_CALLED = 0;
     }
 }
 

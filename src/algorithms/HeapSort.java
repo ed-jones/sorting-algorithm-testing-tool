@@ -56,5 +56,17 @@ public class HeapSort<T> implements ISort<T> {
             // recursively heapify the affected sub-tree
             heapify(input, size, max, ICompare);
         }
+
+        NUM_CALLED += 2;
+    }
+
+    private int NUM_CALLED = 0;
+
+    public int getCalled() {
+        return NUM_CALLED;
+    }
+
+    public void resetCalled() {
+        NUM_CALLED = 0;
     }
 }

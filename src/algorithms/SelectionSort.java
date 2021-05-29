@@ -22,6 +22,8 @@ public class SelectionSort<T> implements ISort<T> {
                 {
                     // update minIndex with the new lowest value index
                     minIndex = i;
+
+                    NUM_CALLED++;
                 }
             }
             // step 5: if minIndex has been updated, swap the values at minIndex and currentIndex
@@ -34,5 +36,15 @@ public class SelectionSort<T> implements ISort<T> {
         }
 
         return input;
+    }
+
+    private int NUM_CALLED = 0;
+
+    public int getCalled() {
+        return NUM_CALLED;
+    }
+
+    public void resetCalled() {
+        NUM_CALLED = 0;
     }
 }

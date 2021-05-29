@@ -2,11 +2,13 @@ package testingtool;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import algorithms.interfaces.ISort;
 import helpers.FuncInterface;
+import helpers.TimeComplexityUtil;
 import helpers.TimeUtil;
 import testingtool.TestingTool.TestType;
 
@@ -16,6 +18,7 @@ public class Test<T> {
     private ISort<T> sortingAlgorithm;
     private TestType typeOfTest;
     private List<T> originalList;
+    private int listSize = 0;
     private Integer errorCount = 0;
 
     public Test(FuncInterface<T> _ICompare, ISort<T> _sortingAlgorithm, TestType _typeOfTest, List<T> _originalList) {
@@ -23,9 +26,11 @@ public class Test<T> {
         sortingAlgorithm = _sortingAlgorithm;
         typeOfTest = _typeOfTest;
         originalList = _originalList;
+        listSize = originalList.size();
     }
 
     public void run() {
+        System.out.println("---------------------------------");
         switch (typeOfTest) {
             case PRESORTED:
                 this.execPresorted();
@@ -50,6 +55,10 @@ public class Test<T> {
         }
         TimeUtil.stopClock();
         TimeUtil.outputMessage();
+
+        System.out.println("The number of times compare function was called: " + sortingAlgorithm.getCalled());
+        
+        TimeComplexityUtil.calcTimeComplexity(sortingAlgorithm.getCalled(), listSize);
         System.out.println();
     }
 
@@ -108,11 +117,35 @@ public class Test<T> {
     }
 
     private void execReverseSorted() {
+        System.out.println("Starting reverse-sorted list test:");
 
+        // Create copy of original List
+        List<T> sortedList = new ArrayList<T>();
+        for(T l : originalList)
+            sortedList.add(l);
+
+        // pre sort list
+        sortedList = sortingAlgorithm.sort(sortedList, ICompare);
+        // Reverse list
+        Collections.reverse(sortedList);
+        sortingAlgorithm.resetCalled();
+
+        TimeUtil.startClock();
+
+        sortedList = sortingAlgorithm.sort(sortedList, ICompare);
+
+        // Check Length
+        validateLength(originalList.size(), sortedList.size());
+
+        // Check that all elements are the same
+        validateListElements(originalList, sortedList);
+
+        // Check list is actually sorted
+        validateListSorted(sortedList);
     }
 
     private void execPresorted() {
-        System.out.println("Starting presorted list test:");
+        System.out.println("Starting pre-sorted list test:");
 
         // Create copy of original List
         List<T> sortedList = new ArrayList<T>();
@@ -121,6 +154,7 @@ public class Test<T> {
 
         //pre sort list
         sortedList = sortingAlgorithm.sort(sortedList, ICompare);
+        sortingAlgorithm.resetCalled();
         
         TimeUtil.startClock();
 

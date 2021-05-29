@@ -5,4 +5,8 @@ import helpers.FuncInterface;
 
 public interface ISort<T> {
     List<T> sort(List<T> input, FuncInterface<T> ICompare);
+
+    int getCalled();
+
+    void resetCalled();
 }
