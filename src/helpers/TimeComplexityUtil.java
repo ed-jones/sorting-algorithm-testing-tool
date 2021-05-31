@@ -3,11 +3,8 @@ package helpers;
 public class TimeComplexityUtil {
     public static void calcTimeComplexity(int comparisons, int arrLength) {
         int nSquared = (int) Math.pow(arrLength, 2);
-
         int logn = (int) Math.log(arrLength);
-
         int nlogn = arrLength * logn;
-
         int n = arrLength;
         
         int[] arr = {n, logn, nlogn, nSquared};
@@ -26,62 +23,45 @@ public class TimeComplexityUtil {
         }
     }
 
-        // Returns element closest to target in arr[]
-    public static int findClosest(int arr[], int target)
+    private static int findClosest(int input[], int tar)
     {
-        int n = arr.length;
+        int n = input.length;
+
+        if (tar <= input[0])
+            return input[0];
+        if (tar >= input[n - 1])
+            return input[n - 1];
  
-        // Corner cases
-        if (target <= arr[0])
-            return arr[0];
-        if (target >= arr[n - 1])
-            return arr[n - 1];
- 
-        // Doing binary search
         int i = 0, j = n, mid = 0;
         while (i < j) {
             mid = (i + j) / 2;
  
-            if (arr[mid] == target)
-                return arr[mid];
- 
-            /* If target is less than array element,
-               then search in left */
-            if (target < arr[mid]) {
-        
-                // If target is greater than previous
-                // to mid, return closest of two
-                if (mid > 0 && target > arr[mid - 1])
-                    return getClosest(arr[mid - 1],
-                                  arr[mid], target);
-                 
-                /* Repeat for left half */
-                j = mid;             
+            if (input[mid] == tar) {
+                return input[mid];
             }
  
-            // If target is greater than mid
-            else {
-                if (mid < n-1 && target < arr[mid + 1])
-                    return getClosest(arr[mid],
-                          arr[mid + 1], target);               
-                i = mid + 1; // update i
+            if (tar < input[mid]) {
+                if (mid > 0 && tar > input[mid - 1]) {
+                    return closest(input[mid - 1], input[mid], tar);
+                }
+                j = mid;             
+            } else {
+                if (mid < n-1 && tar < input[mid + 1])
+                    return closest(input[mid],
+                          input[mid + 1], tar);               
+                i = mid + 1; 
             }
         }
- 
-        // Only single element left after search
-        return arr[mid];
+
+        return input[mid];
     }
  
-    // Method to compare which one is the more close
-    // We find the closest by taking the difference
-    //  between the target and both values. It assumes
-    // that val2 is greater than val1 and target lies
-    // between these two.
-    public static int getClosest(int val1, int val2, int target)
+    private static int closest(int el1, int el2, int tar)
     {
-        if (target - val1 >= val2 - target)
-            return val2;       
-        else
-            return val1;       
+        if (tar - el1 >= el2 - tar) {
+            return el2;
+        } else {
+            return el1;       
+        }
     }
 }
